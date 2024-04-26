@@ -10,13 +10,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "presentation_rooms")
-public class PresentationRoom {
+@Table(name = "topics")
+public class Topic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "room_id")
-    private int roomId;
+    @Column(name = "topic_id")
+    private int topicId;
 
-    private int capacity;
+    private String title;
 }
