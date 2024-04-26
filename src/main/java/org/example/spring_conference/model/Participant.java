@@ -23,4 +23,8 @@ public class Participant {
 
     @Column(name = "last_name", nullable = false , length = 30)
     private String lastName;
+
+    @ManyToOne
+    @JoinColumn(name = "FK_country", nullable = false)
+    private Country countryOfOrigin;
 }

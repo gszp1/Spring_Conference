@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -20,4 +23,7 @@ public class Country {
 
     @Column(unique = true, nullable = false, length = 50)
     private String name;
+
+    @OneToMany(mappedBy = "countryOfOrigin")
+    List<Participant> participants = new ArrayList<>();
 }
