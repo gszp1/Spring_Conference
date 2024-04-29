@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -21,5 +22,5 @@ public class Conference {
     private int conferenceId;
 
     @OneToMany(mappedBy = "conference")
-    private List<Presentation> presentations;
+    private List<Presentation> presentations = new ArrayList<>();
 }
