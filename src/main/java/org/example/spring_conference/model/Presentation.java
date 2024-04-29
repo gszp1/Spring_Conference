@@ -35,4 +35,6 @@ public class Presentation {
     @JoinColumn(name = "FK_conference", nullable = false)
     private Conference conference;
 
+    
+
 }

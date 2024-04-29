@@ -1,0 +1,7 @@
+Rules of model:
+- User can have only one role,
+  but there can be multiple users with given role (ManyToOne)
+- Conference has multiple presentations,
+  but presentation can be part of only one conference(ManyToOne)
+- PresentationRoom can hold multiple presentations,
+  but presentation can take place in only one room. (ManyToOne) 
