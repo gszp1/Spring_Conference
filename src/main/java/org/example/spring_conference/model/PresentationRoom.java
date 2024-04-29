@@ -21,6 +21,7 @@ public class PresentationRoom {
     @Column(name = "room_id")
     private int roomId;
 
+    @Column(nullable = false)
     private int capacity;
 
     @OneToMany(mappedBy = "presentationRoom")
