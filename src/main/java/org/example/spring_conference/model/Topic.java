@@ -18,5 +18,6 @@ public class Topic {
     @Column(name = "topic_id")
     private int topicId;
 
+    @Column(nullable = false, unique = true)
     private String title;
 }
