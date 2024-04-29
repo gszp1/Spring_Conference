@@ -17,4 +17,6 @@ public class Presentation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "presentation_id")
     private int presentationId;
+
+
 }
