@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -19,4 +22,7 @@ public class PresentationRoom {
     private int roomId;
 
     private int capacity;
+
+    @OneToMany(mappedBy = "presentationRoom")
+    private List<Presentation> presentations = new ArrayList<>();
 }
