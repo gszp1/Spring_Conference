@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -17,4 +19,7 @@ public class Conference {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "conference_id")
     private int conferenceId;
+
+    @OneToMany(mappedBy = "conference")
+    private List<Presentation> presentations;
 }

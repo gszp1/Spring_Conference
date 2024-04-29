@@ -18,5 +18,8 @@ public class Presentation {
     @Column(name = "presentation_id")
     private int presentationId;
 
+    @ManyToOne
+    @JoinColumn(name = "FK_conference", nullable = false)
+    private Conference conference;
 
 }
