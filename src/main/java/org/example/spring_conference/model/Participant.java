@@ -27,4 +27,8 @@ public class Participant {
     @ManyToOne
     @JoinColumn(name = "FK_country", nullable = false)
     private Country countryOfOrigin;
+
+    @ManyToOne
+    @JoinColumn(name = "FK_role")
+    private Role role;
 }
