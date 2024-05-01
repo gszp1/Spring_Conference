@@ -6,3 +6,4 @@ _**Rules of model**_:
 composite key consisting of topicId and conferenceId. Additional connection with presentation
 wit unique and non-nullable constraint ensures that given presentation is unique to conference
 and that given presentation can be of only one topic.
+5. Additionally relationship between presentation and join table is OneToOne, as given presentation can shown only on one conference and conference can have only one presentation on given topic.
