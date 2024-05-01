@@ -10,11 +10,9 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 @Embeddable
-public class ConferenceTopicPresentationKey {
+public class ConferenceTopicKey {
 
     private int conferenceId;
 
     private int topicId;
-
-    private int presentationId;
 }
