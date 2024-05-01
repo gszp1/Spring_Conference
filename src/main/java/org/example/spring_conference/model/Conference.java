@@ -21,6 +21,9 @@ public class Conference {
     @Column(name = "conference_id")
     private int conferenceId;
 
+    @Column(unique = true, nullable = false)
+    private String title;
+
     @OneToMany(mappedBy = "conference")
     private List<ConferenceTopicPresentation> topics = new ArrayList<>();
 }
