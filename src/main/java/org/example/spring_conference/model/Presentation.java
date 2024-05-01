@@ -32,10 +32,9 @@ public class Presentation {
     private Timestamp duration;
 
     @ManyToOne
-    @JoinColumn(name = "FK_conference", nullable = false)
-    private Conference conference;
-
-    @ManyToOne
     @JoinColumn(name = "FK_presentation_room", nullable = false)
     private PresentationRoom presentationRoom;
+
+    @OneToOne(mappedBy = "presentation")
+    private ConferenceTopicPresentation conferenceTopicPresentation;
 }

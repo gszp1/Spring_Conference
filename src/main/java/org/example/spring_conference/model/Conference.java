@@ -22,5 +22,5 @@ public class Conference {
     private int conferenceId;
 
     @OneToMany(mappedBy = "conference")
-    private List<Presentation> presentations = new ArrayList<>();
+    private List<ConferenceTopicPresentation> topics = new ArrayList<>();
 }
