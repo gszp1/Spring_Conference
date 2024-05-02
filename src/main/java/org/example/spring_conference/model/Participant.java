@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -31,4 +34,7 @@ public class Participant {
     @ManyToOne
     @JoinColumn(name = "FK_role")
     private Role role;
+
+    @OneToMany(mappedBy = "participant")
+    private List<PresentationParticipant> presentationParticipants = new ArrayList<>();
 }

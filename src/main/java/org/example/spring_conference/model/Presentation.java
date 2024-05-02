@@ -9,6 +9,8 @@ import lombok.Setter;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -37,4 +39,7 @@ public class Presentation {
 
     @OneToOne(mappedBy = "presentation")
     private ConferenceTopicPresentation conferenceTopicPresentation;
+
+    @OneToMany(mappedBy = "presentation")
+    private List<PresentationParticipant> presentationParticipants = new ArrayList<>();
 }
