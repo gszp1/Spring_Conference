@@ -26,4 +26,8 @@ public class PresentationRoom {
 
     @OneToMany(mappedBy = "presentationRoom")
     private List<Presentation> presentations = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "FK_hotel", nullable = false)
+    private Hotel hotel;
 }
