@@ -14,5 +14,5 @@ public class PresentationParticipantKey {
 
     private int presentationId;
 
-    private int conferenceId;
+    private int participantId;
 }

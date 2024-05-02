@@ -3,6 +3,7 @@ package org.example.spring_conference.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -25,5 +26,5 @@ public class Hotel {
     private String address;
 
     @OneToMany(mappedBy = "hotel")
-    private List<Presentation> presentations;
+    private List<PresentationRoom> presentationRooms = new ArrayList<>();
 }
