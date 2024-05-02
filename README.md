@@ -8,3 +8,5 @@ wit unique and non-nullable constraint ensures that given presentation is unique
 and that given presentation can be of only one topic.
 5. Additionally relationship between presentation and join table is OneToOne,
 as given presentation can be shown only on one conference and conference can have only one presentation on given topic.
+6. Hotel has multiple presentation rooms, but given presentation room can belong only to one hotel (OneToMany).
+
