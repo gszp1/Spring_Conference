@@ -3,7 +3,9 @@ package org.example.spring_conference.service;
 import jakarta.transaction.Transactional;
 import org.example.spring_conference.model.Conference;
 import org.example.spring_conference.model.Topic;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -34,5 +36,23 @@ public class ConferenceServiceTests {
         Conference conference = new Conference();
         conference.setTitle("Title1");
         conference = conferenceService.save(conference);
+    }
+
+    // Tests if service returns participants that took part in conference with given id
+    @Test
+    public void DataExists_GetAllParticipantsByConferenceId_CorrectRecords() {
+
+    }
+
+    // Tests if service returns participants that have given role and took part in conference with given id
+    @Test
+    public void DataExists_GetAllPresentationsByConferenceIdAndRole_CorrectRecords() {
+
+    }
+
+    // Tests if service returns participants that are from given country and took part in conference with given id
+    @Test
+    public void DataExists_GetAllPresentationsByTopicIdAndCountry_CorrectRecords() {
+        
     }
 }
