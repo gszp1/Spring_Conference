@@ -37,4 +37,7 @@ public class Participant {
 
     @OneToMany(mappedBy = "participant")
     private List<PresentationParticipant> presentationParticipants = new ArrayList<>();
+
+    @OneToMany(mappedBy = "presenter")
+    private List<Presentation> presentedPresentations = new ArrayList<>();
 }

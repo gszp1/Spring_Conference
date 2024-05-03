@@ -42,4 +42,8 @@ public class Presentation {
 
     @OneToMany(mappedBy = "presentation")
     private List<PresentationParticipant> presentationParticipants = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "FK_presenter", nullable = false)
+    private Participant presenter;
 }
