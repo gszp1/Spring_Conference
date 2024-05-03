@@ -17,11 +17,11 @@ public class PresentationParticipantService {
         this.presentationParticipantRepository = presentationParticipantRepository;
     }
 
-    public PresentationParticipant save(PresentationParticipant presentationParticipant){
+    public PresentationParticipant save(PresentationParticipant presentationParticipant) {
         return presentationParticipantRepository.save(presentationParticipant);
     }
 
-    public List<PresentationParticipant> saveAll(List<PresentationParticipant> presentationParticipants){
+    public List<PresentationParticipant> saveAll(List<PresentationParticipant> presentationParticipants) {
         return presentationParticipantRepository.saveAll(presentationParticipants);
     }
 }
