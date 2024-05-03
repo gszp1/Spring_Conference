@@ -1,8 +1,16 @@
 package org.example.spring_conference.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.example.spring_conference.compositekeys.ConferenceTopicKey;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "conference_topic_presentations")
 public class ConferenceTopicPresentation {

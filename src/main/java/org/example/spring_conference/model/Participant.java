@@ -1,7 +1,6 @@
 package org.example.spring_conference.model;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Entity
 @Table(name = "participants")
 public class Participant {
@@ -24,7 +23,7 @@ public class Participant {
     @Column(name = "first_name", nullable = false, length = 30)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false , length = 30)
+    @Column(name = "last_name", nullable = false, length = 30)
     private String lastName;
 
     @ManyToOne
