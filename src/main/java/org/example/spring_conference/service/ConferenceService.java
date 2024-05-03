@@ -5,6 +5,8 @@ import org.example.spring_conference.repository.ConferenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ConferenceService {
 
@@ -17,5 +19,9 @@ public class ConferenceService {
 
     public Conference save(Conference conference) {
         return conferenceRepository.save(conference);
+    }
+
+    public List<Conference> saveAll(List<Conference> conferences) {
+        return conferenceRepository.saveAll(conferences);
     }
 }
