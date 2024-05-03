@@ -53,6 +53,6 @@ public class ConferenceServiceTests {
     // Tests if service returns participants that are from given country and took part in conference with given id
     @Test
     public void DataExists_GetAllPresentationsByTopicIdAndCountry_CorrectRecords() {
-        
+
     }
 }
