@@ -12,14 +12,16 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
+@Table(name = "roles")
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int role_id;
+    @Column(name = "role_id")
+    private int roleId;
 
-    @Column(nullable = false, unique = true)
-    private String role_name;
+    @Column(nullable = false, unique = true, name = "role_name")
+    private String roleName;
 
     @OneToMany(mappedBy = "role")
     private List<Participant> participants = new ArrayList<>();
