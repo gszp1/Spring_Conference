@@ -63,20 +63,16 @@ public class ConferenceServiceTests {
         country2.setName("Germany");
         countryService.save(country2);
 
-        // Create and save sample participants
-        Participant participant1 = new Participant();
-        participant1.setFirstName("John");
-        participant1.setLastName("Doe");
-        participant1.setCountryOfOrigin(country1);
-        participant1.setRole(role1);
-        participantService.save(participant1);
+        // Create and save sample hotels
+        Hotel hotel1 = new Hotel();
+        hotel1.setName("Hotel 1");
+        hotel1.setAddress("Address 1");
+        hotelService.save(hotel1);
 
-        Participant participant2 = new Participant();
-        participant2.setFirstName("Steve");
-        participant2.setLastName("Blum");
-        participant2.setCountryOfOrigin(country2);
-        participant2.setRole(role2);
-        participantService.save(participant2);
+        Hotel hotel2 = new Hotel();
+        hotel2.setName("Hotel 2");
+        hotel2.setAddress("Address 2");
+        hotelService.save(hotel2);
 
         // Create and save sample topics
         Topic topic1 = new Topic();
@@ -96,32 +92,6 @@ public class ConferenceServiceTests {
         conference2.setTitle("Conference 2");
         conferenceService.save(conference2);
 
-        // Create and save sample presentations
-        Presentation presentation1 = new Presentation();
-        presentation1.setDate(LocalDate.now());
-        presentation1.setStartTime(LocalTime.now());
-        presentation1.setDuration(new Timestamp(System.currentTimeMillis()));
-        presentation1.setPresenter(participant1);
-        presentationService.save(presentation1);
-
-        Presentation presentation2 = new Presentation();
-        presentation2.setDate(LocalDate.now());
-        presentation2.setStartTime(LocalTime.now());
-        presentation2.setDuration(new Timestamp(System.currentTimeMillis()));
-        presentation2.setPresenter(participant2);
-        presentationService.save(presentation2);
-
-        // Create and save sample hotels
-        Hotel hotel1 = new Hotel();
-        hotel1.setName("Hotel 1");
-        hotel1.setAddress("Address 1");
-        hotelService.save(hotel1);
-
-        Hotel hotel2 = new Hotel();
-        hotel2.setName("Hotel 2");
-        hotel2.setAddress("Address 2");
-        hotelService.save(hotel2);
-
         // Create and save sample presentation rooms
         PresentationRoom room1 = new PresentationRoom();
         room1.setCapacity(50);
@@ -132,6 +102,52 @@ public class ConferenceServiceTests {
         room2.setCapacity(100);
         room2.setHotel(hotel2);
         presentationRoomService.save(room2);
+
+        hotel1.getPresentationRooms().add(room2);
+        hotel1.getPresentationRooms().add(room1);
+        hotelService.save(hotel1);
+
+        PresentationRoom room3 = new PresentationRoom();
+        room2.setCapacity(70);
+        room2.setHotel(hotel1);
+        presentationRoomService.save(room3);
+
+        hotel2.getPresentationRooms().add(room3);
+        hotel1.getPresentationRooms().add(room2);
+        hotel1.getPresentationRooms().add(room1);
+        hotelService.save(hotel1);
+        hotelService.save(hotel2);
+
+        // Create and save sample participants
+        Participant participant1 = new Participant();
+        participant1.setFirstName("John");
+        participant1.setLastName("Doe");
+        participant1.setCountryOfOrigin(country1);
+        participant1.setRole(role1);
+        participantService.save(participant1);
+
+        Participant participant2 = new Participant();
+        participant2.setFirstName("Steve");
+        participant2.setLastName("Blum");
+        participant2.setCountryOfOrigin(country2);
+        participant2.setRole(role2);
+        participantService.save(participant2);
+        
+        // Create and save sample presentations
+        Presentation presentation1 = new Presentation();
+        presentation1.setDate(LocalDate.now().minusDays(1));
+        presentation1.setStartTime(LocalTime.now().plusHours(1));
+        presentation1.setDuration(new Timestamp(System.currentTimeMillis()));
+        presentation1.setPresenter(participant1);
+        presentationService.save(presentation1);
+
+        Presentation presentation2 = new Presentation();
+        presentation2.setDate(LocalDate.now().plusDays(2));
+        presentation2.setStartTime(LocalTime.now().plusHours(2));
+        presentation2.setDuration(new Timestamp(System.currentTimeMillis()));
+        presentation2.setPresenter(participant2);
+        presentationService.save(presentation2);
+
     }
 
     // Tests if service returns participants that took part in conference with given id
