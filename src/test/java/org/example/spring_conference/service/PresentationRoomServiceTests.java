@@ -159,9 +159,21 @@ public class PresentationRoomServiceTests {
         room2.getPresentations().add(presentation2);
         room2 = presentationRoomService.save(room2);
 
+        Presentation presentation3 = new Presentation();
+        presentation3.setDate(LocalDate.now().plusDays(3));
+        presentation3.setStartTime(LocalTime.now().plusHours(3));
+        presentation3.setDuration(new Timestamp(System.currentTimeMillis()));
+        presentation3.setPresenter(participant2);
+        presentation3.setPresentationRoom(room1);
+        presentation3.setTitle("presentation 3");
+        presentation3 = presentationService.save(presentation3);
+        room1.getPresentations().add(presentation3);
+        room1 = presentationRoomService.save(room1);
+
         // save presenters
         participant1.getPresentedPresentations().add(presentation1);
         participant2.getPresentedPresentations().add(presentation2);
+        participant2.getPresentedPresentations().add(presentation3);
         participant1 = participantService.save(participant1);
         participant2 = participantService.save(participant2);
 
@@ -232,7 +244,7 @@ public class PresentationRoomServiceTests {
     public void DataExists_GetNumberOfPresentationsForEachRoom_CorrectNumbers() {
         var roomsPresentationCounts = presentationRoomService.getPresentationCountByRoom();
         roomsPresentationCounts.forEach(System.out::println);
-        Assertions.assertEquals(1, roomsPresentationCounts.get(0).getCount());
+        Assertions.assertEquals(2, roomsPresentationCounts.get(0).getCount());
         Assertions.assertEquals(1, roomsPresentationCounts.get(1).getCount());
         Assertions.assertEquals(0, roomsPresentationCounts.get(2).getCount());
     }

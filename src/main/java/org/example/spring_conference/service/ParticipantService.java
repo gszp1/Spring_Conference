@@ -1,10 +1,12 @@
 package org.example.spring_conference.service;
 
 import org.example.spring_conference.dto.ParticipantCountryDto;
-import org.example.spring_conference.dto.ParticipantDto;
+import org.example.spring_conference.dto.ParticipantPresentedCountDto;
+import org.example.spring_conference.dto.ParticipantRoleDto;
 import org.example.spring_conference.model.Participant;
 import org.example.spring_conference.repository.ParticipantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,18 +30,18 @@ public class ParticipantService {
         return participantRepository.saveAll(participants);
     }
 
-    public List<ParticipantDto> getAllParticipantsByConferenceId(Integer conferenceId) {
+    public List<ParticipantRoleDto> getAllParticipantsByConferenceId(Integer conferenceId) {
         return participantRepository.getAllParticipantsByConferenceId(conferenceId)
                 .stream()
-                .map(p -> new ParticipantDto(p.getFirstName(), p.getLastName(), p.getRole().getRoleName()))
+                .map(p -> new ParticipantRoleDto(p.getFirstName(), p.getLastName(), p.getRole().getRoleName()))
                 .collect(Collectors.toList()
                 );
     }
 
-    public List<ParticipantDto> getAllParticipantsByConferenceIdAndRole(Integer conferenceId, String role) {
+    public List<ParticipantRoleDto> getAllParticipantsByConferenceIdAndRole(Integer conferenceId, String role) {
         return participantRepository.getAllParticipantsByConferenceIdAndRole(conferenceId, role)
                 .stream()
-                .map(p-> new ParticipantDto(p.getFirstName(), p.getLastName(), p.getRole().getRoleName()))
+                .map(p-> new ParticipantRoleDto(p.getFirstName(), p.getLastName(), p.getRole().getRoleName()))
                 .collect(Collectors.toList()
                 );
     }
@@ -50,5 +52,12 @@ public class ParticipantService {
                 .map(p -> new ParticipantCountryDto(p.getFirstName(), p.getLastName(), p.getCountryOfOrigin().getName()))
                 .collect(Collectors.toList()
                 );
+    }
+
+    public ParticipantPresentedCountDto getPresenterWithMostPresentations() {
+        return participantRepository
+                .getPresenterWithMostPresentations(PageRequest.of(0, 1))
+                .getContent()
+                .getFirst();
     }
 }

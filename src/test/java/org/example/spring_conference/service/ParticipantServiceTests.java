@@ -4,7 +4,8 @@ import jakarta.transaction.Transactional;
 import org.example.spring_conference.compositekeys.ConferenceTopicKey;
 import org.example.spring_conference.compositekeys.PresentationParticipantKey;
 import org.example.spring_conference.dto.ParticipantCountryDto;
-import org.example.spring_conference.dto.ParticipantDto;
+import org.example.spring_conference.dto.ParticipantPresentedCountDto;
+import org.example.spring_conference.dto.ParticipantRoleDto;
 import org.example.spring_conference.model.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -162,9 +163,21 @@ public class ParticipantServiceTests {
         room2.getPresentations().add(presentation2);
         room2 = presentationRoomService.save(room2);
 
+        Presentation presentation3 = new Presentation();
+        presentation3.setDate(LocalDate.now().plusDays(3));
+        presentation3.setStartTime(LocalTime.now().plusHours(3));
+        presentation3.setDuration(new Timestamp(System.currentTimeMillis()));
+        presentation3.setPresenter(participant2);
+        presentation3.setPresentationRoom(room1);
+        presentation3.setTitle("presentation 3");
+        presentation3 = presentationService.save(presentation3);
+        room1.getPresentations().add(presentation3);
+        room1 = presentationRoomService.save(room1);
+
         // save presenters
         participant1.getPresentedPresentations().add(presentation1);
         participant2.getPresentedPresentations().add(presentation2);
+        participant2.getPresentedPresentations().add(presentation3);
         participant1 = participantService.save(participant1);
         participant2 = participantService.save(participant2);
 
@@ -230,16 +243,10 @@ public class ParticipantServiceTests {
         presentationService.saveAll(Arrays.asList(presentation1, presentation2));
     }
 
-    // Tests if service returns participant who presented the largest number of presentations
-    @Test
-    public void DataExists_GetParticipantWithMostPresentedPresentations_CorrectParticipant() {
-
-    }
-
     // Tests if service returns participants that took part in conference with given id
     @Test
     public void DataExists_GetAllParticipantsByConferenceId_CorrectRecords() {
-        List<ParticipantDto> participants = participantService.getAllParticipantsByConferenceId(1);
+        List<ParticipantRoleDto> participants = participantService.getAllParticipantsByConferenceId(1);
         Assertions.assertEquals("Steve", participants.getFirst().firstName());
         Assertions.assertEquals("Blum", participants.getFirst().lastName());
         participants.forEach(System.out::println);
@@ -253,7 +260,7 @@ public class ParticipantServiceTests {
     @Test
     public void DataExists_GetAllParticipantsByConferenceIdAndParticipantRole_CorrectRecords() {
         // get participants that attended conference with id 1 and role scientist - should be Steve Blum
-        List<ParticipantDto> participants = participantService.getAllParticipantsByConferenceIdAndRole(1, "Scientist");
+        List<ParticipantRoleDto> participants = participantService.getAllParticipantsByConferenceIdAndRole(1, "Scientist");
         Assertions.assertEquals("Steve", participants.getFirst().firstName());
         Assertions.assertEquals("Blum", participants.getFirst().lastName());
         participants.forEach(System.out::println);
@@ -295,5 +302,15 @@ public class ParticipantServiceTests {
         // get participants that attended conference with id 2 and country Germany - should be 0 records
         participants = participantService.getParticipantsByConferenceIdAndCountry(2, "Germany");
         Assertions.assertEquals(0, participants.size());
+    }
+
+    // Tests if service returns participant who presented the largest number of presentations
+    @Test
+    public void DataExists_GetPresenterWithMostPresentations_CorrectPresenter() {
+        ParticipantPresentedCountDto presenter = participantService.getPresenterWithMostPresentations();
+        Assertions.assertEquals(2, presenter.getCount());
+        Assertions.assertEquals("Steve", presenter.getFirstName());
+        Assertions.assertEquals("Blum", presenter.getLastName());
+        System.out.println(presenter);
     }
 }
