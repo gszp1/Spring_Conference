@@ -26,6 +26,9 @@ public class Presentation {
     private int presentationId;
 
     @Column(nullable = false)
+    private String title;
+
+    @Column(nullable = false)
     private LocalDate date;
 
     @Column(nullable = false)

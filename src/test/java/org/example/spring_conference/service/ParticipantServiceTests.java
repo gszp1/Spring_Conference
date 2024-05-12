@@ -146,6 +146,7 @@ public class ParticipantServiceTests {
         presentation1.setDuration(new Timestamp(System.currentTimeMillis()));
         presentation1.setPresenter(participant1);
         presentation1.setPresentationRoom(room1);
+        presentation1.setTitle("presentation 1");
         presentation1 = presentationService.save(presentation1);
         room1.getPresentations().add(presentation1);
         room1 = presentationRoomService.save(room1);
@@ -156,6 +157,7 @@ public class ParticipantServiceTests {
         presentation2.setDuration(new Timestamp(System.currentTimeMillis()));
         presentation2.setPresenter(participant2);
         presentation2.setPresentationRoom(room2);
+        presentation2.setTitle("presentation 2");
         presentation2 = presentationService.save(presentation2);
         room2.getPresentations().add(presentation2);
         room2 = presentationRoomService.save(room2);
@@ -230,7 +232,7 @@ public class ParticipantServiceTests {
 
     // Tests if service returns participant who presented the largest number of presentations
     @Test
-    public void DataExists_GetParticipantWhoPresentedLargestNumberOfPresentations_CorrectParticipant() {
+    public void DataExists_GetParticipantWithMostPresentedPresentations_CorrectParticipant() {
 
     }
 

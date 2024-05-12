@@ -1,5 +1,6 @@
 package org.example.spring_conference.service;
 
+import org.example.spring_conference.dto.RoomPresentationsCountDto;
 import org.example.spring_conference.model.PresentationRoom;
 import org.example.spring_conference.repository.PresentationRoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,9 @@ public class PresentationRoomService {
 
     public List<PresentationRoom> saveAll(List<PresentationRoom> presentationRooms) {
         return presentationRoomRepository.saveAll(presentationRooms);
+    }
+
+    List<RoomPresentationsCountDto> getPresentationCountByRoom() {
+        return presentationRoomRepository.getPresentationCountByRoom();
     }
 }

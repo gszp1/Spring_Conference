@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.example.spring_conference.compositekeys.ConferenceTopicKey;
 import org.example.spring_conference.compositekeys.PresentationParticipantKey;
 import org.example.spring_conference.model.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,6 +143,7 @@ public class PresentationRoomServiceTests {
         presentation1.setDuration(new Timestamp(System.currentTimeMillis()));
         presentation1.setPresenter(participant1);
         presentation1.setPresentationRoom(room1);
+        presentation1.setTitle("presentation 1");
         presentation1 = presentationService.save(presentation1);
         room1.getPresentations().add(presentation1);
         room1 = presentationRoomService.save(room1);
@@ -152,6 +154,7 @@ public class PresentationRoomServiceTests {
         presentation2.setDuration(new Timestamp(System.currentTimeMillis()));
         presentation2.setPresenter(participant2);
         presentation2.setPresentationRoom(room2);
+        presentation2.setTitle("presentation 2");
         presentation2 = presentationService.save(presentation2);
         room2.getPresentations().add(presentation2);
         room2 = presentationRoomService.save(room2);
@@ -227,6 +230,10 @@ public class PresentationRoomServiceTests {
     // Tests if service returns correct number of presentations for each room
     @Test
     public void DataExists_GetNumberOfPresentationsForEachRoom_CorrectNumbers() {
-
+        var roomsPresentationCounts = presentationRoomService.getPresentationCountByRoom();
+        roomsPresentationCounts.forEach(System.out::println);
+        Assertions.assertEquals(1, roomsPresentationCounts.get(0).getCount());
+        Assertions.assertEquals(1, roomsPresentationCounts.get(1).getCount());
+        Assertions.assertEquals(0, roomsPresentationCounts.get(2).getCount());
     }
 }
