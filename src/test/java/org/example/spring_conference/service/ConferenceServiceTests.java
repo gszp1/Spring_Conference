@@ -54,11 +54,11 @@ public class ConferenceServiceTests {
     public void setUp() {
         // Create and save sample roles
         Role role1 = new Role();
-        role1.setRole_name("Student");
+        role1.setRoleName("Student");
         role1 = roleService.save(role1);
 
         Role role2 = new Role();
-        role2.setRole_name("Scientist");
+        role2.setRoleName("Scientist");
         role2 = roleService.save(role2);
 
         // Create and save sample countries
@@ -224,30 +224,5 @@ public class ConferenceServiceTests {
         conferenceService.saveAll(Arrays.asList(conference1, conference2));
         topicService.saveAll(Arrays.asList(topic1, topic2));
         presentationService.saveAll(Arrays.asList(presentation1, presentation2));
-    }
-
-    // Tests if service returns participants that took part in conference with given id
-    @Test
-    public void DataExists_GetAllParticipantsByConferenceId_CorrectRecords() {
-        var participants = conferenceService.getAllParticipantsByConferenceId(1);
-        Assertions.assertEquals("Steve", participants.getFirst().firstName());
-        Assertions.assertEquals("Blum", participants.getFirst().lastName());
-        participants.forEach(System.out::println);
-        participants = conferenceService.getAllParticipantsByConferenceId(2);
-        Assertions.assertEquals("John", participants.getFirst().firstName());
-        Assertions.assertEquals("Doe", participants.getFirst().lastName());
-        participants.forEach(System.out::println);
-    }
-
-    // Tests if service returns participants that have given role and took part in conference with given id
-    @Test
-    public void DataExists_GetAllPresentationsByConferenceIdAndRole_CorrectRecords() {
-
-    }
-
-    // Tests if service returns participants that are from given country and took part in conference with given id
-    @Test
-    public void DataExists_GetAllPresentationsByTopicIdAndCountry_CorrectRecords() {
-
     }
 }

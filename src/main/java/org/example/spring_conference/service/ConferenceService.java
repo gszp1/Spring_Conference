@@ -1,5 +1,6 @@
 package org.example.spring_conference.service;
 
+import org.example.spring_conference.dto.ParticipantCountryDto;
 import org.example.spring_conference.dto.ParticipantDto;
 import org.example.spring_conference.model.Conference;
 import org.example.spring_conference.repository.ConferenceRepository;
@@ -26,13 +27,4 @@ public class ConferenceService {
     public List<Conference> saveAll(List<Conference> conferences) {
         return conferenceRepository.saveAll(conferences);
     }
-
-    public List<ParticipantDto> getAllParticipantsByConferenceId(Integer conferenceId) {
-        return conferenceRepository.getAllParticipantsByConferenceId(conferenceId)
-                .stream()
-                .map(c -> new ParticipantDto(c.getFirstName(), c.getLastName()))
-                .collect(Collectors.toList()
-                );
-    }
-
 }

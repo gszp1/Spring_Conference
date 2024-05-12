@@ -11,13 +11,4 @@ import java.util.List;
 
 @Repository
 public interface ConferenceRepository extends JpaRepository<Conference, Integer> {
-
-    @Query("SELECT DISTINCT pp.participant FROM PresentationParticipant pp " +
-            "JOIN pp.presentation p " +
-            "JOIN p.conferenceTopicPresentation ctp " +
-            "JOIN ctp.conference c " +
-            "WHERE c.conferenceId = :conferenceId"
-    )
-    List<Participant> getAllParticipantsByConferenceId(@Param("conferenceId") Integer conferenceId);
-
 }

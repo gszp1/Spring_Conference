@@ -3,7 +3,10 @@ package org.example.spring_conference.service;
 import jakarta.transaction.Transactional;
 import org.example.spring_conference.compositekeys.ConferenceTopicKey;
 import org.example.spring_conference.compositekeys.PresentationParticipantKey;
+import org.example.spring_conference.dto.ParticipantCountryDto;
+import org.example.spring_conference.dto.ParticipantDto;
 import org.example.spring_conference.model.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.List;
 
 @SpringBootTest
 @Transactional
@@ -52,11 +56,11 @@ public class ParticipantServiceTests {
     public void setUp() {
         // Create and save sample roles
         Role role1 = new Role();
-        role1.setRole_name("Student");
+        role1.setRoleName("Student");
         role1 = roleService.save(role1);
 
         Role role2 = new Role();
-        role2.setRole_name("Scientist");
+        role2.setRoleName("Scientist");
         role2 = roleService.save(role2);
 
         // Create and save sample countries
@@ -225,8 +229,68 @@ public class ParticipantServiceTests {
     }
 
     // Tests if service returns participant who presented the largest number of presentations
+//    @Test
+//    public void DataExists_GetParticipantWhoPresentedLargestNumberOfPresentations_CorrectParticipant() {
+//
+//    }
+    // Tests if service returns participants that took part in conference with given id
     @Test
-    public void DataExists_GetParticipantWhoPresentedLargestNumberOfPresentations_CorrectParticipant() {
+    public void DataExists_GetAllParticipantsByConferenceId_CorrectRecords() {
+        List<ParticipantDto> participants = participantService.getAllParticipantsByConferenceId(1);
+        Assertions.assertEquals("Steve", participants.getFirst().firstName());
+        Assertions.assertEquals("Blum", participants.getFirst().lastName());
+        participants.forEach(System.out::println);
+        participants = participantService.getAllParticipantsByConferenceId(2);
+        Assertions.assertEquals("John", participants.getFirst().firstName());
+        Assertions.assertEquals("Doe", participants.getFirst().lastName());
+        participants.forEach(System.out::println);
+    }
 
+    // Tests if service returns participants that have given role and took part in conference with given id
+    @Test
+    public void DataExists_GetAllParticipantsByConferenceIdAndParticipantRole_CorrectRecords() {
+        // get participants that attended conference with id 1 and role scientist - should be Steve Blum
+        List<ParticipantDto> participants = participantService.getAllParticipantsByConferenceIdAndRole(1, "Scientist");
+        Assertions.assertEquals("Steve", participants.getFirst().firstName());
+        Assertions.assertEquals("Blum", participants.getFirst().lastName());
+        participants.forEach(System.out::println);
+
+        // get participants that attended conference with id 1 and role student - should be 0 records
+        participants = participantService.getAllParticipantsByConferenceIdAndRole(1, "Student");
+        Assertions.assertEquals(0, participants.size());
+
+        // get participants that attended conference with id 2 and role student - should be John Doe
+        participants = participantService.getAllParticipantsByConferenceIdAndRole(2, "Student");
+        Assertions.assertEquals("John", participants.getFirst().firstName());
+        Assertions.assertEquals("Doe", participants.getFirst().lastName());
+        participants.forEach(System.out::println);
+
+        // get participants that attended conference with id 2 and role scientist - should be 0 records
+        participants = participantService.getAllParticipantsByConferenceIdAndRole(2, "Scientist");
+        Assertions.assertEquals(0, participants.size());
+    }
+
+    // Tests if service returns participants that are from given country and took part in conference with given id
+    @Test
+    public void DataExists_GetAllPresentationsByTopicIdAndCountry_CorrectRecords() {
+        // get participants that attended conference with id 1 and country Germany - should be Steve Blum
+        List<ParticipantCountryDto> participants = participantService.getParticipantsByConferenceIdAndCountry(1, "Germany");
+        Assertions.assertEquals("Steve", participants.getFirst().firstName());
+        Assertions.assertEquals("Blum", participants.getFirst().lastName());
+        participants.forEach(System.out::println);
+
+        // get participants that attended conference with id 1 and country Poland - should be 0 records
+        participants = participantService.getParticipantsByConferenceIdAndCountry(1, "Poland");
+        Assertions.assertEquals(0, participants.size());
+
+        // get participants that attended conference with id 2 and country Poland - should be John Doe
+        participants = participantService.getParticipantsByConferenceIdAndCountry(2, "Poland");
+        Assertions.assertEquals("John", participants.getFirst().firstName());
+        Assertions.assertEquals("Doe", participants.getFirst().lastName());
+        participants.forEach(System.out::println);
+
+        // get participants that attended conference with id 2 and country Germany - should be 0 records
+        participants = participantService.getParticipantsByConferenceIdAndCountry(2, "Germany");
+        Assertions.assertEquals(0, participants.size());
     }
 }

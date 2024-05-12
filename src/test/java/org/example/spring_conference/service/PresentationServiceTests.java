@@ -52,11 +52,11 @@ public class PresentationServiceTests {
     public void setUp() {
         // Create and save sample roles
         Role role1 = new Role();
-        role1.setRole_name("Student");
+        role1.setRoleName("Student");
         role1 = roleService.save(role1);
 
         Role role2 = new Role();
-        role2.setRole_name("Scientist");
+        role2.setRoleName("Scientist");
         role2 = roleService.save(role2);
 
         // Create and save sample countries
