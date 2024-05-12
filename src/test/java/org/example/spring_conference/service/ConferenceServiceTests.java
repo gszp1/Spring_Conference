@@ -207,8 +207,18 @@ public class ConferenceServiceTests {
         conferenceTopicPresentation2.setPresentation(presentation2);
         conferenceTopicPresentationService.save(conferenceTopicPresentation2);
 
-        
-
+        // create connections
+        // 1.) conference1, topic1, presentation1
+        conference1.getTopics().add(conferenceTopicPresentation1);
+        presentation1.setConferenceTopicPresentation(conferenceTopicPresentation1);
+        topic1.getConferences().add(conferenceTopicPresentation1);
+        // 2.) conference2, topic2, presentation2
+        conference2.getTopics().add(conferenceTopicPresentation2);
+        presentation2.setConferenceTopicPresentation(conferenceTopicPresentation2);
+        topic2.getConferences().add(conferenceTopicPresentation2);
+        conferenceService.saveAll(Arrays.asList(conference1, conference2));
+        topicService.saveAll(Arrays.asList(topic1, topic2));
+        presentationService.saveAll(Arrays.asList(presentation1, presentation2));
     }
 
     // Tests if service returns participants that took part in conference with given id
