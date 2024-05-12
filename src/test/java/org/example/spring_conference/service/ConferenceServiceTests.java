@@ -1,6 +1,7 @@
 package org.example.spring_conference.service;
 
 import jakarta.transaction.Transactional;
+import org.example.spring_conference.compositekeys.ConferenceTopicKey;
 import org.example.spring_conference.compositekeys.PresentationParticipantKey;
 import org.example.spring_conference.model.*;
 import org.example.spring_conference.repository.TopicRepository;
@@ -44,6 +45,9 @@ public class ConferenceServiceTests {
 
     @Autowired
     private PresentationRoomService presentationRoomService;
+
+    @Autowired
+    private ConferenceTopicPresentationService conferenceTopicPresentationService;
 
     @BeforeEach
     public void setUp() {
@@ -187,6 +191,23 @@ public class ConferenceServiceTests {
         participantService.saveAll(Arrays.asList(participant1, participant2));
 
         // Create conference_topic_presentations sample data
+        ConferenceTopicKey conferenceTopicKey1 = new ConferenceTopicKey(conference1.getConferenceId(), topic1.getTopicId());
+        ConferenceTopicPresentation conferenceTopicPresentation1 = new ConferenceTopicPresentation();
+        conferenceTopicPresentation1.setId(conferenceTopicKey1);
+        conferenceTopicPresentation1.setConference(conference1);
+        conferenceTopicPresentation1.setTopic(topic1);
+        conferenceTopicPresentation1.setPresentation(presentation1);
+        conferenceTopicPresentationService.save(conferenceTopicPresentation1);
+
+        ConferenceTopicKey conferenceTopicKey2 = new ConferenceTopicKey(conference2.getConferenceId(), topic2.getTopicId());
+        ConferenceTopicPresentation conferenceTopicPresentation2 = new ConferenceTopicPresentation();
+        conferenceTopicPresentation2.setId(conferenceTopicKey2);
+        conferenceTopicPresentation2.setConference(conference2);
+        conferenceTopicPresentation2.setTopic(topic2);
+        conferenceTopicPresentation2.setPresentation(presentation2);
+        conferenceTopicPresentationService.save(conferenceTopicPresentation2);
+
+        
 
     }
 
