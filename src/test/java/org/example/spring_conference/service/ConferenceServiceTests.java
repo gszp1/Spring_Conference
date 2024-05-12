@@ -3,7 +3,9 @@ package org.example.spring_conference.service;
 import jakarta.transaction.Transactional;
 import org.example.spring_conference.compositekeys.ConferenceTopicKey;
 import org.example.spring_conference.compositekeys.PresentationParticipantKey;
+import org.example.spring_conference.dto.ParticipantDto;
 import org.example.spring_conference.model.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -227,7 +229,14 @@ public class ConferenceServiceTests {
     // Tests if service returns participants that took part in conference with given id
     @Test
     public void DataExists_GetAllParticipantsByConferenceId_CorrectRecords() {
-
+        var participants = conferenceService.getAllParticipantsByConferenceId(1);
+        Assertions.assertEquals("Steve", participants.getFirst().firstName());
+        Assertions.assertEquals("Blum", participants.getFirst().lastName());
+        participants.forEach(System.out::println);
+        participants = conferenceService.getAllParticipantsByConferenceId(2);
+        Assertions.assertEquals("John", participants.getFirst().firstName());
+        Assertions.assertEquals("Doe", participants.getFirst().lastName());
+        participants.forEach(System.out::println);
     }
 
     // Tests if service returns participants that have given role and took part in conference with given id
