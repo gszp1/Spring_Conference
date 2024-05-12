@@ -41,7 +41,7 @@ public class ParticipantService {
     public List<ParticipantRoleDto> getAllParticipantsByConferenceIdAndRole(Integer conferenceId, String role) {
         return participantRepository.getAllParticipantsByConferenceIdAndRole(conferenceId, role)
                 .stream()
-                .map(p-> new ParticipantRoleDto(p.getFirstName(), p.getLastName(), p.getRole().getRoleName()))
+                .map(p -> new ParticipantRoleDto(p.getFirstName(), p.getLastName(), p.getRole().getRoleName()))
                 .collect(Collectors.toList()
                 );
     }
