@@ -223,9 +223,4 @@ public class PresentationServiceTests {
         topicService.saveAll(Arrays.asList(topic1, topic2));
         presentationService.saveAll(Arrays.asList(presentation1, presentation2));
     }
-    // Tests if service returns each topic that is presented during at least one presentation
-    @Test
-    public void DataExists_GetAllPresentationsTopics() {
-
-    }
 }
