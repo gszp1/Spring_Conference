@@ -54,76 +54,72 @@ public class ConferenceServiceTests {
         // Create and save sample roles
         Role role1 = new Role();
         role1.setRole_name("Student");
-        roleService.save(role1);
+        role1 = roleService.save(role1);
 
         Role role2 = new Role();
         role2.setRole_name("Scientist");
-        roleService.save(role2);
+        role2 = roleService.save(role2);
 
         // Create and save sample countries
         Country country1 = new Country();
         country1.setName("Poland");
-        countryService.save(country1);
+        country1 = countryService.save(country1);
 
         Country country2 = new Country();
         country2.setName("Germany");
-        countryService.save(country2);
+        country2 = countryService.save(country2);
 
         // Create and save sample hotels
         Hotel hotel1 = new Hotel();
         hotel1.setName("Hotel 1");
         hotel1.setAddress("Address 1");
-        hotelService.save(hotel1);
+        hotel1 = hotelService.save(hotel1);
 
         Hotel hotel2 = new Hotel();
         hotel2.setName("Hotel 2");
         hotel2.setAddress("Address 2");
-        hotelService.save(hotel2);
-
-        // Create and save sample topics
-        Topic topic1 = new Topic();
-        topic1.setTitle("Topic 1");
-        topicService.save(topic1);
-
-        Topic topic2 = new Topic();
-        topic2.setTitle("Topic 2");
-        topicService.save(topic2);
-
-        // Create and save sample conferences
-        Conference conference1 = new Conference();
-        conference1.setTitle("Conference 1");
-        conferenceService.save(conference1);
-
-        Conference conference2 = new Conference();
-        conference2.setTitle("Conference 2");
-        conferenceService.save(conference2);
+        hotel2 = hotelService.save(hotel2);
 
         // Create and save sample presentation rooms
         PresentationRoom room1 = new PresentationRoom();
         room1.setCapacity(50);
         room1.setHotel(hotel1);
-        presentationRoomService.save(room1);
+        room1 = presentationRoomService.save(room1);
 
         PresentationRoom room2 = new PresentationRoom();
         room2.setCapacity(100);
         room2.setHotel(hotel2);
-        presentationRoomService.save(room2);
-
-        hotel1.getPresentationRooms().add(room2);
-        hotel1.getPresentationRooms().add(room1);
-        hotelService.save(hotel1);
+        room2 = presentationRoomService.save(room2);
 
         PresentationRoom room3 = new PresentationRoom();
-        room2.setCapacity(70);
-        room2.setHotel(hotel1);
-        presentationRoomService.save(room3);
+        room3.setCapacity(70);
+        room3.setHotel(hotel1);
+        room3 = presentationRoomService.save(room3);
 
         // add presentation rooms to hotels
         hotel2.getPresentationRooms().add(room3);
         hotel1.getPresentationRooms().add(room2);
         hotel1.getPresentationRooms().add(room1);
-        hotelService.save(hotel1);
-        hotelService.save(hotel2);
+        hotel1 = hotelService.save(hotel1);
+        hotel2 = hotelService.save(hotel2);
+
+        // Create and save sample topics
+        Topic topic1 = new Topic();
+        topic1.setTitle("Topic 1");
+        topic1 = topicService.save(topic1);
+
+        Topic topic2 = new Topic();
+        topic2.setTitle("Topic 2");
+        topic2 = topicService.save(topic2);
+
+        // Create and save sample conferences
+        Conference conference1 = new Conference();
+        conference1.setTitle("Conference 1");
+        conference1 = conferenceService.save(conference1);
+
+        Conference conference2 = new Conference();
+        conference2.setTitle("Conference 2");
+        conference2 = conferenceService.save(conference2);
 
         // Create and save sample participants
         Participant participant1 = new Participant();
@@ -131,14 +127,14 @@ public class ConferenceServiceTests {
         participant1.setLastName("Doe");
         participant1.setCountryOfOrigin(country1);
         participant1.setRole(role1);
-        participantService.save(participant1);
+        participant1 = participantService.save(participant1);
 
         Participant participant2 = new Participant();
         participant2.setFirstName("Steve");
         participant2.setLastName("Blum");
         participant2.setCountryOfOrigin(country2);
         participant2.setRole(role2);
-        participantService.save(participant2);
+        participant2 = participantService.save(participant2);
 
         // Create and save sample presentations
         Presentation presentation1 = new Presentation();
@@ -146,20 +142,20 @@ public class ConferenceServiceTests {
         presentation1.setStartTime(LocalTime.now().plusHours(1));
         presentation1.setDuration(new Timestamp(System.currentTimeMillis()));
         presentation1.setPresenter(participant1);
-        presentationService.save(presentation1);
+        presentation1 = presentationService.save(presentation1);
 
         Presentation presentation2 = new Presentation();
         presentation2.setDate(LocalDate.now().plusDays(2));
         presentation2.setStartTime(LocalTime.now().plusHours(2));
         presentation2.setDuration(new Timestamp(System.currentTimeMillis()));
         presentation2.setPresenter(participant2);
-        presentationService.save(presentation2);
+        presentation2 = presentationService.save(presentation2);
 
         // save presenters
         participant1.getPresentedPresentations().add(presentation1);
         participant2.getPresentedPresentations().add(presentation2);
-        participantService.save(participant1);
-        participantService.save(participant2);
+        participant1 = participantService.save(participant1);
+        participant2 =  participantService.save(participant2);
 
         // Add participants to presentations
         PresentationParticipantKey key1 = new PresentationParticipantKey();
@@ -169,7 +165,7 @@ public class ConferenceServiceTests {
         presentationParticipant1.setId(key1);
         presentationParticipant1.setPresentation(presentation2);
         presentationParticipant1.setParticipant(participant1);
-        presentationParticipantService.save(presentationParticipant1);
+        presentationParticipant1 =  presentationParticipantService.save(presentationParticipant1);
 
         PresentationParticipantKey key2 = new PresentationParticipantKey();
         key2.setPresentationId(presentation1.getPresentationId());
@@ -178,7 +174,7 @@ public class ConferenceServiceTests {
         presentationParticipant2.setId(key2);
         presentationParticipant2.setPresentation(presentation1);
         presentationParticipant2.setParticipant(participant2);
-        presentationParticipantService.save(presentationParticipant2);
+        presentationParticipant2 =  presentationParticipantService.save(presentationParticipant2);
 
         // set connections
         // presentationParticipant1 presentation2 participant1
@@ -187,8 +183,10 @@ public class ConferenceServiceTests {
         // presentationParticipant2 presentation1 participant2
         presentation1.getPresentationParticipants().add(presentationParticipant2);
         participant2.getPresentationParticipants().add(presentationParticipant2);
-        presentationService.saveAll(Arrays.asList(presentation1, presentation2));
-        participantService.saveAll(Arrays.asList(participant1, participant2));
+        presentation1 = presentationService.save(presentation1);
+        presentation2 = presentationService.save(presentation2);
+        participant1 = participantService.save(participant1);
+        participant2 = participantService.save(participant2);
 
         // Create conference_topic_presentations sample data
         ConferenceTopicKey conferenceTopicKey1 = new ConferenceTopicKey(conference1.getConferenceId(), topic1.getTopicId());
@@ -197,7 +195,7 @@ public class ConferenceServiceTests {
         conferenceTopicPresentation1.setConference(conference1);
         conferenceTopicPresentation1.setTopic(topic1);
         conferenceTopicPresentation1.setPresentation(presentation1);
-        conferenceTopicPresentationService.save(conferenceTopicPresentation1);
+        conferenceTopicPresentation1 =  conferenceTopicPresentationService.save(conferenceTopicPresentation1);
 
         ConferenceTopicKey conferenceTopicKey2 = new ConferenceTopicKey(conference2.getConferenceId(), topic2.getTopicId());
         ConferenceTopicPresentation conferenceTopicPresentation2 = new ConferenceTopicPresentation();
@@ -205,7 +203,7 @@ public class ConferenceServiceTests {
         conferenceTopicPresentation2.setConference(conference2);
         conferenceTopicPresentation2.setTopic(topic2);
         conferenceTopicPresentation2.setPresentation(presentation2);
-        conferenceTopicPresentationService.save(conferenceTopicPresentation2);
+        conferenceTopicPresentation2 = conferenceTopicPresentationService.save(conferenceTopicPresentation2);
 
         // create connections
         // 1.) conference1, topic1, presentation1
