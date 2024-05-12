@@ -4,7 +4,6 @@ import jakarta.transaction.Transactional;
 import org.example.spring_conference.compositekeys.ConferenceTopicKey;
 import org.example.spring_conference.compositekeys.PresentationParticipantKey;
 import org.example.spring_conference.model.*;
-import org.example.spring_conference.repository.TopicRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,20 +141,26 @@ public class ConferenceServiceTests {
         presentation1.setStartTime(LocalTime.now().plusHours(1));
         presentation1.setDuration(new Timestamp(System.currentTimeMillis()));
         presentation1.setPresenter(participant1);
+        presentation1.setPresentationRoom(room1);
         presentation1 = presentationService.save(presentation1);
+        room1.getPresentations().add(presentation1);
+        room1 = presentationRoomService.save(room1);
 
         Presentation presentation2 = new Presentation();
         presentation2.setDate(LocalDate.now().plusDays(2));
         presentation2.setStartTime(LocalTime.now().plusHours(2));
         presentation2.setDuration(new Timestamp(System.currentTimeMillis()));
         presentation2.setPresenter(participant2);
+        presentation2.setPresentationRoom(room2);
         presentation2 = presentationService.save(presentation2);
+        room2.getPresentations().add(presentation2);
+        room2 = presentationRoomService.save(room2);
 
         // save presenters
         participant1.getPresentedPresentations().add(presentation1);
         participant2.getPresentedPresentations().add(presentation2);
         participant1 = participantService.save(participant1);
-        participant2 =  participantService.save(participant2);
+        participant2 = participantService.save(participant2);
 
         // Add participants to presentations
         PresentationParticipantKey key1 = new PresentationParticipantKey();
@@ -165,7 +170,7 @@ public class ConferenceServiceTests {
         presentationParticipant1.setId(key1);
         presentationParticipant1.setPresentation(presentation2);
         presentationParticipant1.setParticipant(participant1);
-        presentationParticipant1 =  presentationParticipantService.save(presentationParticipant1);
+        presentationParticipant1 = presentationParticipantService.save(presentationParticipant1);
 
         PresentationParticipantKey key2 = new PresentationParticipantKey();
         key2.setPresentationId(presentation1.getPresentationId());
@@ -174,7 +179,7 @@ public class ConferenceServiceTests {
         presentationParticipant2.setId(key2);
         presentationParticipant2.setPresentation(presentation1);
         presentationParticipant2.setParticipant(participant2);
-        presentationParticipant2 =  presentationParticipantService.save(presentationParticipant2);
+        presentationParticipant2 = presentationParticipantService.save(presentationParticipant2);
 
         // set connections
         // presentationParticipant1 presentation2 participant1
@@ -195,7 +200,7 @@ public class ConferenceServiceTests {
         conferenceTopicPresentation1.setConference(conference1);
         conferenceTopicPresentation1.setTopic(topic1);
         conferenceTopicPresentation1.setPresentation(presentation1);
-        conferenceTopicPresentation1 =  conferenceTopicPresentationService.save(conferenceTopicPresentation1);
+        conferenceTopicPresentation1 = conferenceTopicPresentationService.save(conferenceTopicPresentation1);
 
         ConferenceTopicKey conferenceTopicKey2 = new ConferenceTopicKey(conference2.getConferenceId(), topic2.getTopicId());
         ConferenceTopicPresentation conferenceTopicPresentation2 = new ConferenceTopicPresentation();
