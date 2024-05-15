@@ -4,6 +4,14 @@
 
 Model for attending scientific conference.
 
+## Used technologies ##
+
+1. Java 21
+2. Spring Boot
+3. Gradle
+4. Hibernate
+5. PostgreSQL
+
 ## Model specifications ##
 
 ### Tables (Entity) ###
