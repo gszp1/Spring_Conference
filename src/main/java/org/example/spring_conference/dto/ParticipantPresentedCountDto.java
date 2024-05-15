@@ -1,13 +1,11 @@
 package org.example.spring_conference.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class ParticipantPresentedCountDto {
 
